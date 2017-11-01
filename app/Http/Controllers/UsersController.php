@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\task;
 
-class tasksController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,7 @@ class tasksController extends Controller
      */
     public function index()
     {
-        $tasks = task::all();
-        return view('tasks.index', [
-            'tasks' => $tasks,
-            ]);
+        //
     }
 
     /**
@@ -30,10 +26,7 @@ class tasksController extends Controller
      */
     public function create()
     {
-        $task = new task;
-        return view('tasks.create',[
-                'task' => $task,
-            ]);
+        //
     }
 
     /**
@@ -44,17 +37,7 @@ class tasksController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'status' => 'required|max:10',
-            'content' => 'required|max:255',
-            ]);
-            
-        $request->user()->tasks()->create([
-            'content' => $request->content,
-            'status' => $request->status,
-        ]);
-
-        return redirect('/');
+        //
     }
 
     /**
@@ -65,10 +48,7 @@ class tasksController extends Controller
      */
     public function show($id)
     {
-        $tasks = task::find($id);
-        if (\Auth::user()->id !== $tasks->user_id) {
-            return redirect('/');
-        }
+        //
     }
 
     /**
@@ -79,10 +59,7 @@ class tasksController extends Controller
      */
     public function edit($id)
     {
-        $task = task::find($id);
-        return view('tasks.edit', [
-                'task' => $task,
-            ]);
+        //
     }
 
     /**
@@ -94,16 +71,7 @@ class tasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'status' => 'required|max:10',
-            'content' => 'required|max:255',
-            ]);
-        $task = task::find($id);
-        $task->status = $request->status;
-        $task->content = $request->content;
-        $task->save();
-        
-        return redirect('/');
+        //
     }
 
     /**
@@ -114,9 +82,6 @@ class tasksController extends Controller
      */
     public function destroy($id)
     {
-        $task = task::find($id);
-        $task->delete();
-        
-        return redirect('/');
+        //
     }
 }
