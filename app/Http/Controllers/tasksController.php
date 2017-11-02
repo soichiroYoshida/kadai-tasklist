@@ -20,7 +20,7 @@ class tasksController extends Controller
         $tasks = task::all();
         return view('tasks.index', [
             'tasks' => $tasks,
-            ]);
+            ]);    
     }
 
     /**
@@ -49,9 +49,9 @@ class tasksController extends Controller
             'content' => 'required|max:255',
             ]);
             
-        $request->user()->tasks()->create([
-            'content' => $request->content,
+        $request->user()->tasks()->create( [
             'status' => $request->status,
+            'content' => $request->content,
         ]);
 
         return redirect('/');
@@ -66,7 +66,11 @@ class tasksController extends Controller
     public function show($id)
     {
         $tasks = task::find($id);
-        if (\Auth::user()->id !== $tasks->user_id) {
+        if (\Auth::user()->id === $tasks->user_id) {
+            return view('tasks.show', [
+                'task' => $tasks,
+            ]);
+        }else{
             return redirect('/');
         }
     }

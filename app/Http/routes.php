@@ -13,8 +13,9 @@
 
 Route::get('/', 'tasksController@index');
 Route::resource('tasks', 'tasksController');
+
 Route::group(['middleware' =>'auth'], function() {
-   Route::resource('tasks', 'tasksController'); 
+    Route::resource('tasks', 'tasksController'); 
 });
 
 //ユーザー登録
